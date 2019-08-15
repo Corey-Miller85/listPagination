@@ -72,15 +72,14 @@ appendPageLinks(list)
 
 
 document.addEventListener('click', (e) => {
-   const targetA = document.querySelectorAll('a');
+   const targetA = document.querySelectorAll('a'); //selects all anchor tags
    const target = e.target;
-   if (target.tagName == "A") {
-      for (let i = 0; i < targetA.length; i += 1) {
+   if (target.tagName == "A") {     //if the click was on an anchor tag
+      for (let i = 0; i < targetA.length; i += 1) { //loop thorugh anchor tags setting class to blank
          targetA[i].className = "";
       }
-      target.className = "active";
-      console.log(target);
-      showPage(list, parseInt(target.textContent));
+      target.className = "active"; //sets clicked link to active class
+      showPage(list, parseInt(target.textContent)); //shows new page
    }
 });
 
