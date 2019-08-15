@@ -126,6 +126,8 @@ document.addEventListener('click', (e) => {
 // // });
 
 showPage(list, 1);
+appendSearchBar();
+
 // appendSearchBar();
 
 
