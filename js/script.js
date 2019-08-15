@@ -52,21 +52,21 @@ function appendPageLinks(list) {
 appendPageLinks(list)
 
 
-// function appendSearchBar() {
-//    const targetPageHeader = document.querySelector('.page-header');
-//    const createSearch = document.createElement('div');
-//    const searchInput = document.createElement('input');
-//    const searchButton = document.createElement('button');
-//    createSearch.className = 'student-search';
-//    searchInput.className = 'search-input';
-//    searchInput.placeholder = 'Search for students...';
-//    searchButton.textContent = 'Search';
-//    targetPageHeader.appendChild(createSearch);
-//    const targetPageHeaderChild = targetPageHeader.lastElementChild;
-//    targetPageHeaderChild.appendChild(searchInput);
-//    const targetSearch = document.querySelector('.student-search');
-//    targetSearch.appendChild(searchButton);
-// }
+function appendSearchBar() {
+   const targetPageHeader = document.querySelector('.page-header');
+   const createSearch = document.createElement('div');
+   const searchInput = document.createElement('input');
+   const searchButton = document.createElement('button');
+   createSearch.className = 'student-search';
+   searchInput.className = 'search-input';
+   searchInput.placeholder = 'Search for students...';
+   searchButton.textContent = 'Search';
+   targetPageHeader.appendChild(createSearch);
+   const targetPageHeaderChild = targetPageHeader.lastElementChild;
+   targetPageHeaderChild.appendChild(searchInput);
+   const targetSearch = document.querySelector('.student-search');
+   targetSearch.appendChild(searchButton);
+}
 
 
 
