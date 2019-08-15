@@ -39,6 +39,10 @@ function appendPageLinks(list) {
       createA.href = '#' 
       createA.textContent = i + 1;
       liList[i].appendChild(createA);
+
+      if (i === 0 ){  //if it is the first list item, set its class to active.
+         createA.className = 'active';
+      }
    }
 
 
@@ -47,26 +51,6 @@ function appendPageLinks(list) {
 
 appendPageLinks(list)
 
-
-   // const pageDiv = document.querySelector('div.page');
-   // const createDiv = document.createElement('div');
-   // createDiv.className = "pagination";
-   // pageDiv.appendChild(createDiv);
-  
-   // for (let i = 0; i < Math.ceil((list.length / numberOfItems)); i += 1){
-   //    const ul = paginationDiv.querySelector('ul');
-   //    const createLI = document.createElement('li');
-   //    ul.appendChild(createLI);
-   //    createA.href = '#' 
-   //    createA.textContent = i + 1;
-   //    const li = ul.querySelector('li');
-   //    li.appendChild(createA);
-   //    if (i === ){
-   //       const aSelector = li.querySelector('a');
-   //       aSelector.className = 'active';
-   //    }
-   // }
-// }
 
 // function appendSearchBar() {
 //    const targetPageHeader = document.querySelector('.page-header');
@@ -87,18 +71,18 @@ appendPageLinks(list)
 
 
 
-// document.addEventListener('click', (e) => {
-//    const targetA = document.querySelectorAll('a');
-//    const target = e.target;
-//    if (target.tagName == "A") {
-//       for (let i = 0; i < targetA.length; i += 1) {
-//          targetA[i].className = "";
-//       }
-//       target.className = "active";
-//       console.log(target);
-//       showPage(list, parseInt(target.textContent));
-//    }
-// });
+document.addEventListener('click', (e) => {
+   const targetA = document.querySelectorAll('a');
+   const target = e.target;
+   if (target.tagName == "A") {
+      for (let i = 0; i < targetA.length; i += 1) {
+         targetA[i].className = "";
+      }
+      target.className = "active";
+      console.log(target);
+      showPage(list, parseInt(target.textContent));
+   }
+});
 
 // const emptyStudents = () => {
 //    for (let i = 0; i < list.length; i ++) {
