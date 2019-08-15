@@ -112,16 +112,14 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('click', (e) => {
-   if (e.target.tagName === 'BUTTON'){
-      const searchInput = document.querySelector('.search-input');
-      const value = searchInput.value;
-      for (let i = 0; i < list.length; i += 1) {
-         const ul = document.querySelector('.student-list');
-         const li = document.querySelectorAll('.student-list .student-item');
-         const h3 = document.querySelectorAll('.student-list .student-item h3')[i];
-         if (h3.textContent.includes(value) == false) {
-            ul.removeChild(li[i])
-         }
+   const input = document.querySelector('input');
+   
+   if (e.target.tagName == "BUTTON") {
+      for (let i = 0; i < list.length; i += 1){
+         const h3 = list[i].querySelector("h3");
+         const text = h3.textContent;
+         console.log(text);
+
       }
    }
 });
