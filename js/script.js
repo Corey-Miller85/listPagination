@@ -16,6 +16,11 @@ function showPage(list,page){
 }
 
 function appendPageLinks(list) {
+   const checkPaginationDiv = document.querySelector('.pagination');
+   if (checkPaginationDiv) {
+      const ul = checkPaginationDiv.querySelector('ul');
+      checkPaginationDiv.removeChild(ul);
+   }
    const pageDiv = document.querySelector('div.page'); //targets main div
    const createPaginationDiv = document.createElement('div'); //creates div for pagination
    createPaginationDiv.className= 'pagination'; // sets class name of pagination
@@ -49,28 +54,26 @@ function appendPageLinks(list) {
 
 }
 
-appendPageLinks(list)
-
-
+// adds the search bar. 
 function appendSearchBar() {
-   const targetPageHeader = document.querySelector('.page-header');
-   const createSearch = document.createElement('div');
-   const searchInput = document.createElement('input');
-   const searchButton = document.createElement('button');
-   createSearch.className = 'student-search';
-   searchInput.className = 'search-input';
-   searchInput.placeholder = 'Search for students...';
-   searchButton.textContent = 'Search';
-   targetPageHeader.appendChild(createSearch);
-   const targetPageHeaderChild = targetPageHeader.lastElementChild;
-   targetPageHeaderChild.appendChild(searchInput);
-   const targetSearch = document.querySelector('.student-search');
-   targetSearch.appendChild(searchButton);
+   const targetPageHeader = document.querySelector('.page-header');  //targets page-header class
+   const createSearch = document.createElement('div');   //creates div element for search bar
+   const searchInput = document.createElement('input'); // creates input element for search bar
+   const searchButton = document.createElement('button'); //creates button element for search bar
+   createSearch.className = 'student-search'; // sets className for search div
+   searchInput.className = 'search-input'; // sets class name for search input
+   searchInput.placeholder = 'Search for students...';   //sets placeholder text for input form 
+   searchButton.textContent = 'Search'; // sets button text
+   targetPageHeader.appendChild(createSearch);  //adds search div to page
+   const targetPageHeaderChild = targetPageHeader.lastElementChild; // targets location for search input form 
+   targetPageHeaderChild.appendChild(searchInput); // add search input form to page. 
+   const targetSearch = document.querySelector('.student-search'); // target the search div 
+   targetSearch.appendChild(searchButton); // add search button
 }
 
 
 
-
+// event listener for the page link buttons
 document.addEventListener('click', (e) => {
    const targetA = document.querySelectorAll('a'); //selects all anchor tags
    const target = e.target;
@@ -83,52 +86,51 @@ document.addEventListener('click', (e) => {
    }
 });
 
-// const emptyStudents = () => {
-//    for (let i = 0; i < list.length; i ++) {
-//       list[i].style.display = 'none';
-//    }
-// }
 
-// document.addEventListener('click', (e) => {
-//    const input = document.querySelector('input');
-//    var newlist = []
-//    if (e.target.tagName == "BUTTON") {
-//       for (let i = 0; i < list.length; i += 1){
-//          const h3 = list[i].querySelector("h3");
-//          const text = h3.textContent;
-//          if (input.value.length !== 0 && text.includes(input.value)) {
-//             newlist.push(list[i]);
-//             showPage(newlist,1);
-//          } else {
-
-//          }
-//       }
-      
-//    }
-// });
-
-// // document.addEventListener('keyup', () => {
-// //    const input = document.querySelector('input');
-
-// //    const newList = [];
-// //       for (let i = 0; i < list.length; i += 1) {
-// //          const h3 = list[i].querySelector("h3");
-// //          const text = h3.textContent;
-// //          if (input.value.length !== 0 && text.includes(input.value)) {
-// //             newList.push(list[i]);
-// //             console.log(newList);
-// //             showPage(newList,1);
-
-// //          } else {
-
-// //          }
-// //       }
-// // });
-
+//runs the fucntions when the page loads 
 showPage(list, 1);
+appendPageLinks(list);
 appendSearchBar();
 
-// appendSearchBar();
+//assigns constants to the newly created elements for the listeners to use.
+const searchButton = document.querySelector('.student-search button')
+const inputForm = document.querySelector('input');
+
+// event listener for the search button
+searchButton.addEventListener('click', (e) => {
+   const input = document.querySelector('input');
+   var newlist = [] //new array to hold in matches
+   if (e.target.tagName == "BUTTON") {    //if but search button was clicked
+      for (let i = 0; i < list.length; i += 1) {      //loop through original list
+         const h3 = list[i].querySelector("h3");      
+         const text = h3.textContent.toLowerCase();      //assigns the text content converted to lower case  of the h3's to text      
+         if (input.value.length !== 0 && text.includes(input.value)) { //if text field is not blank and has a text match
+            newlist.push(list[i]); // push text matched names to new list
+         } else {
+            list[i].style.display = 'none'; // hide non match
+         }
+      }
+   }
+   showPage(newlist, 1); // returns new page with matches
+   appendPageLinks(newlist); // returns new page links matching number of matches
+});
+
+//event listener for keyup
+inputForm.addEventListener('keyup', () => {
+   const input = document.querySelector('input');
+   var newlist = []  //new array to hold in matches
+   for (let i = 0; i < list.length; i += 1) {   //loop through original list 
+      const h3 = list[i].querySelector("h3");
+      const text = h3.textContent.toLowerCase(); //looking only at name text
+      if (input.value.length != 0 && text.includes(input.value)) { //if text field is not blank and has a text match
+         newlist.push(list[i]);  // push text matched names to new list
+      } else {
+         list[i].style.display = 'none'; // hide non match
+      }
+   }
+   showPage(newlist, 1); // returns new page with matches
+   appendPageLinks(newlist); // returns new page links matching number of matches
+});
 
 
 
@@ -138,5 +140,3 @@ appendSearchBar();
 
 
 
-
-// // Remember to delete the comments that came with this file, and replace them with your own code comments.
