@@ -121,7 +121,7 @@ const searchButton = document.querySelector('.student-search button')
 const inputForm = document.querySelector('input');
 
 // event listener for the search button
-searchButton.addEventListener('click', (e) => {
+searchButton.addEventListener('submit', (e) => {
    const input = document.querySelector('input');
    var newlist = [] //new array to hold in matches
    if (e.target.tagName == "BUTTON") {    //if but search button was clicked
@@ -136,11 +136,6 @@ searchButton.addEventListener('click', (e) => {
       }
       
    }
-     if (newlist.length == 0) {
-        noResults(); //if list is blank run noResult()
-     } else {
-        yesResults(); //if list is not blank, check for no results and then remove if there.
-     }
    showPage(newlist, 1); // returns new page with matches
    appendPageLinks(newlist); // returns new page links matching number of matches
 });
