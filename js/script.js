@@ -20,12 +20,13 @@ function appendPageLinks(list) {
    if (checkPaginationDiv) {
       const ul = checkPaginationDiv.querySelector('ul');
       checkPaginationDiv.removeChild(ul);
-   }
+   } else {
+   
    const pageDiv = document.querySelector('div.page'); //targets main div
    const createPaginationDiv = document.createElement('div'); //creates div for pagination
    createPaginationDiv.className= 'pagination'; // sets class name of pagination
    pageDiv.appendChild(createPaginationDiv); //adds pagination div
-  
+   }
    //targets pagination div, creates Ul and nested LIs
    const createUL = document.createElement('ul');
    const paginationDiv = document.querySelector('.pagination');
@@ -71,6 +72,29 @@ function appendSearchBar() {
    targetSearch.appendChild(searchButton); // add search button
 }
 
+// adds no seach results 
+
+function noResults() {
+const studentList = document.querySelector('.student-list');
+const addNoResults = document.createElement('li');
+addNoResults.className = "no-result";
+addNoResults.textContent = "No Matches Found...";
+addNoResults.style.display = ""
+studentList.appendChild(addNoResults)
+}
+
+function yesResults() {
+   const studentList = document.querySelector('.student-list');
+   const addNoResults = document.createElement('li');
+   addNoResults.className = "no-result";
+   addNoResults.textContent = "No Matches Found...";
+   addNoResults.style.display = ""
+   const checkNoResults = document.querySelector('.no-result');
+   if (checkNoResults) {
+      studentList.removeChild(checkNoResults);
+   }
+}
+
 
 
 // event listener for the page link buttons
@@ -104,13 +128,19 @@ searchButton.addEventListener('click', (e) => {
       for (let i = 0; i < list.length; i += 1) {      //loop through original list
          const h3 = list[i].querySelector("h3");      
          const text = h3.textContent.toLowerCase();      //assigns the text content converted to lower case  of the h3's to text      
-         if (input.value.length !== 0 && text.includes(input.value)) { //if text field is not blank and has a text match
+         if (text.includes(input.value)) { //if text field is not blank and has a text match
             newlist.push(list[i]); // push text matched names to new list
          } else {
             list[i].style.display = 'none'; // hide non match
          }
       }
+      
    }
+     if (newlist.length == 0) {
+        noResults(); //if list is blank run noResult()
+     } else {
+        yesResults(); //if list is not blank, check for no results and then remove if there.
+     }
    showPage(newlist, 1); // returns new page with matches
    appendPageLinks(newlist); // returns new page links matching number of matches
 });
@@ -122,11 +152,18 @@ inputForm.addEventListener('keyup', () => {
    for (let i = 0; i < list.length; i += 1) {   //loop through original list 
       const h3 = list[i].querySelector("h3");
       const text = h3.textContent.toLowerCase(); //looking only at name text
-      if (input.value.length != 0 && text.includes(input.value)) { //if text field is not blank and has a text match
+      if (text.includes(input.value)) { //if text field is not blank and has a text match
          newlist.push(list[i]);  // push text matched names to new list
       } else {
          list[i].style.display = 'none'; // hide non match
       }
+      
+   } 
+
+   if (newlist.length == 0) {
+      noResults(); //if list is blank run noResult()
+   } else {
+      yesResults(); //if list is not blank, check for no results and then remove if there.
    }
    showPage(newlist, 1); // returns new page with matches
    appendPageLinks(newlist); // returns new page links matching number of matches
