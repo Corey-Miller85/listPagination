@@ -163,6 +163,13 @@ inputForm.addEventListener('keyup', () => {
 
    if (newlist.length == 0) {
       noResults(); //if list is blank run noResult()
+   } else {
+      const checkForNoResult = document.querySelector('.no-result');
+      if (checkForNoResult) {
+         const ul = document.querySelector('.student-list');
+         const li = ul.querySelector('.no-result');
+         ul.removeChild(li);
+      }
    }
    showPage(newlist, 1); // returns new page with matches
    appendPageLinks(newlist); // returns new page links matching number of matches
