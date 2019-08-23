@@ -75,6 +75,12 @@ function appendSearchBar() {
 // adds no seach results 
 
 function noResults() {
+   const checkForNoResult = document.querySelector('.no-result');
+   if (checkForNoResult) {
+      const ul = document.querySelector('.student-list');
+      const li = ul.querySelector('.no-result');
+      ul.removeChild(li);
+   }
 const studentList = document.querySelector('.student-list');
 const addNoResults = document.createElement('li');
 addNoResults.className = "no-result";
@@ -83,17 +89,17 @@ addNoResults.style.display = ""
 studentList.appendChild(addNoResults)
 }
 
-function yesResults() {
-   const studentList = document.querySelector('.student-list');
-   const addNoResults = document.createElement('li');
-   addNoResults.className = "no-result";
-   addNoResults.textContent = "No Matches Found...";
-   addNoResults.style.display = ""
-   const checkNoResults = document.querySelector('.no-result');
-   if (checkNoResults) {
-      studentList.removeChild(checkNoResults);
-   }
-}
+// function yesResults() {
+//    const studentList = document.querySelector('.student-list');
+//    const addNoResults = document.createElement('li');
+//    addNoResults.className = "no-result";
+//    addNoResults.textContent = "No Matches Found...";
+//    addNoResults.style.display = ""
+//    const checkNoResults = document.querySelector('.no-result');
+//    if (checkNoResults) {
+//       studentList.removeChild(checkNoResults);
+//    }
+// }
 
 
 
@@ -157,8 +163,6 @@ inputForm.addEventListener('keyup', () => {
 
    if (newlist.length == 0) {
       noResults(); //if list is blank run noResult()
-   } else {
-      yesResults(); //if list is not blank, check for no results and then remove if there.
    }
    showPage(newlist, 1); // returns new page with matches
    appendPageLinks(newlist); // returns new page links matching number of matches
